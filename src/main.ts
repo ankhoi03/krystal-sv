@@ -4,13 +4,13 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, { cors: true });
 
   app.useGlobalPipes(new ValidationPipe());
 
   const config = new DocumentBuilder()
     .setTitle('Welcome to Krystal API')
-    .setDescription('The Krystal API description')
+    .setDescription('From Khoi Kz with love 💕')
     .setVersion('1.0')
     .addBearerAuth()
     .build();
