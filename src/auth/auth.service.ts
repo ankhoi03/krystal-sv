@@ -33,7 +33,15 @@ export class AuthService {
       let user = await this.userService.findOneByEmail(email);
 
       if (!user) {
-        user = await this.userService.createUser(email);
+        const newUser = await this.userService.createUser(email);
+        user = {
+          id: newUser.id,
+          email: newUser.email,
+          username: newUser.username,
+          avatar: newUser.avatar,
+          background: newUser.background,
+          description: newUser.description,
+        };
       }
       const payload = {
         id: user.id,

@@ -6,6 +6,7 @@ import {
 import { PrismaService } from '../prisma/prisma.service';
 import { UserStatus } from './user.interface';
 import { PrismaErrorCode } from '../utils/prisma-error-code';
+import { UpdateProfileDto } from './user.dto';
 
 @Injectable()
 export class UserService {
@@ -33,11 +34,10 @@ export class UserService {
       avatar: user.avatar,
       background: user.background,
       description: user.description,
-      status: user.status,
     };
   }
 
-  public async getUserById(id: number) {
+  public async getProfileById(id: number) {
     const user = await this.prisma.user.findUnique({
       where: {
         id,
@@ -49,34 +49,45 @@ export class UserService {
         avatar: true,
         background: true,
         description: true,
-        status: true,
       },
     });
     if (!user) {
       throw new NotFoundException('User not found');
     }
-    return user;
+    return {
+      id: user.id,
+      email: user.email,
+      username: user.username,
+      avatar: user.avatar,
+      background: user.background,
+      description: user.description,
+    };
   }
 
-  // public async updateUser(id: number, updateProfileDTO: UpdateUserDTO) {
-  //   const result = this.prisma.user.update({
-  //     where: {
-  //       id,
-  //     },
-  //     data: {
-  //       username: updateProfileDTO.username,
-  //       avatar: updateProfileDTO.avatar,
-  //       background: updateProfileDTO.background,
-  //       description: updateProfileDTO.description,
-  //     },
-  //   });
-  //   if (!result) {
-  //     throw new NotFoundException('User not found');
-  //   }
-  //   return {
-  //     message: 'Profile updated successfully',
-  //   };
-  // }
+  public async updateProfile(id: number, updateProfileDTO: UpdateProfileDto) {
+    const user = await this.prisma.user.update({
+      where: {
+        id,
+      },
+      data: {
+        username: updateProfileDTO.username,
+        avatar: updateProfileDTO.avatar,
+        background: updateProfileDTO.background,
+        description: updateProfileDTO.description,
+      },
+    });
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+    return {
+      id: user.id,
+      email: user.email,
+      username: user.username,
+      avatar: user.avatar,
+      background: user.background,
+      description: user.description,
+    };
+  }
 
   async findOneByEmail(email: string) {
     const user = await this.prisma.user.findUnique({
@@ -90,9 +101,15 @@ export class UserService {
         avatar: true,
         background: true,
         description: true,
-        status: true,
       },
     });
-    return user;
+    return {
+      id: user.id,
+      email: user.email,
+      username: user.username,
+      avatar: user.avatar,
+      background: user.background,
+      description: user.description,
+    };
   }
 }

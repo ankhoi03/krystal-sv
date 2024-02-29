@@ -1,4 +1,4 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, OmitType, PartialType } from '@nestjs/swagger';
 import {
   IsEmail,
   IsNotEmpty,
@@ -62,3 +62,7 @@ export class UserResponseDto {
   @IsOptional()
   description?: string;
 }
+
+export class UpdateProfileDto extends PartialType(
+  OmitType(UserResponseDto, ['id', 'email']),
+) {}
