@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsString } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsString, Min } from 'class-validator';
 
 export class MessageResponseDto {
   @ApiProperty({
@@ -9,4 +9,26 @@ export class MessageResponseDto {
   })
   @IsString()
   message: string;
+}
+
+export class FilterQuery {
+  @ApiProperty({
+    type: Number,
+    description: 'Skip number',
+    example: 0,
+  })
+  @IsNumber()
+  @IsNotEmpty()
+  @Min(0)
+  skip: number;
+
+  @ApiProperty({
+    type: Number,
+    description: 'Take number',
+    example: 10,
+  })
+  @IsNumber()
+  @IsNotEmpty()
+  @Min(1)
+  take: number;
 }

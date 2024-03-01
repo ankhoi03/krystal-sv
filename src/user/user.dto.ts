@@ -2,7 +2,9 @@ import { ApiProperty, OmitType, PartialType } from '@nestjs/swagger';
 import {
   IsEmail,
   IsNotEmpty,
+  IsNumber,
   IsOptional,
+  IsPositive,
   IsString,
   IsUrl,
 } from 'class-validator';
@@ -66,3 +68,20 @@ export class UserResponseDto {
 export class UpdateProfileDto extends PartialType(
   OmitType(UserResponseDto, ['id', 'email']),
 ) {}
+
+export class UserSummaryDTO extends OmitType(UserResponseDto, [
+  'email',
+  'background',
+  'description',
+]) {}
+
+export class FollowParamsDTO {
+  @ApiProperty({
+    type: Number,
+    description: 'Id of the user to follow or unfollow',
+    example: 1,
+  })
+  @IsNumber()
+  @IsNotEmpty()
+  userId: number;
+}
