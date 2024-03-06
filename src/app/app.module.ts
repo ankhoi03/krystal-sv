@@ -7,6 +7,7 @@ import { AuthModule } from '../auth/auth.module';
 import { EmailModule } from '../email/email.module';
 import { OtpModule } from '../otp/otp.module';
 import { UserModule } from '../user/user.module';
+import { MediaModule } from '../media/media.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { UserModule } from '../user/user.module';
     EmailModule,
     OtpModule,
     UserModule,
+    MediaModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -20,7 +20,7 @@ import {
   UserSummaryDTO,
 } from './user.dto';
 import { RequestWithUser } from '../auth/auth.interface';
-import { FilterQuery, MessageResponseDto } from '../utils/global.dto';
+import { MessageResponseDto } from '../utils/global.dto';
 import { FollowService } from '../follow/follow.service';
 
 @ApiTags('User')
