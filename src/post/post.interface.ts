@@ -3,3 +3,7 @@ export interface CreatePostParams {
   content: string;
   media?: string[];
 }
+
+export interface UpdatePostParams {
+  content: string;
+}
