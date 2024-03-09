@@ -49,6 +49,9 @@ export class UserService {
         avatar: true,
         background: true,
         description: true,
+        follower: true,
+        following: true,
+        posts: true,
       },
     });
     if (!user) {
@@ -61,6 +64,9 @@ export class UserService {
       avatar: user.avatar,
       background: user.background,
       description: user.description,
+      follower: user.follower.length,
+      following: user.following.length,
+      posts: user.posts.length,
     };
   }
 
@@ -75,6 +81,17 @@ export class UserService {
         background: updateProfileDTO.background,
         description: updateProfileDTO.description,
       },
+      select: {
+        id: true,
+        email: true,
+        username: true,
+        avatar: true,
+        background: true,
+        description: true,
+        following: true,
+        follower: true,
+        posts: true,
+      },
     });
     if (!user) {
       throw new NotFoundException('User not found');
@@ -86,6 +103,9 @@ export class UserService {
       avatar: user.avatar,
       background: user.background,
       description: user.description,
+      follower: user.follower.length,
+      following: user.following.length,
+      posts: user.posts.length,
     };
   }
 

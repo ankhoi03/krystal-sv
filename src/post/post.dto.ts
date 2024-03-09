@@ -91,3 +91,23 @@ export class UpdatePostDto {
   @IsNotEmpty()
   content: string;
 }
+
+export class LikeResponseDto {
+  @ApiProperty({
+    example: 1,
+    description: 'The num of likes of the post',
+  })
+  @IsNumber()
+  @IsNotEmpty()
+  like: number;
+}
+
+export class CommentResponseDto {
+  @ApiProperty({
+    example: 1,
+    description: 'The num of comments of the post',
+  })
+  @IsNumber()
+  @IsNotEmpty()
+  comment: number;
+}

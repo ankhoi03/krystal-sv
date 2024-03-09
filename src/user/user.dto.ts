@@ -62,16 +62,46 @@ export class UserResponseDto {
   @IsString()
   @IsOptional()
   description?: string;
+
+  @ApiProperty({
+    type: Number,
+    description: 'Number of followers',
+    example: 10,
+  })
+  @IsNumber()
+  @IsNotEmpty()
+  follower: number;
+
+  @ApiProperty({
+    type: Number,
+    description: 'Number of following',
+    example: 10,
+  })
+  @IsNumber()
+  @IsNotEmpty()
+  following: number;
+
+  @ApiProperty({
+    type: Number,
+    description: 'Number of posts',
+    example: 10,
+  })
+  @IsNumber()
+  @IsNotEmpty()
+  posts: number;
 }
 
 export class UpdateProfileDto extends PartialType(
-  OmitType(UserResponseDto, ['id', 'email']),
+  OmitType(UserResponseDto, ['id', 'email', 'follower', 'following', 'posts']),
 ) {}
 
 export class UserSummaryDTO extends OmitType(UserResponseDto, [
   'email',
   'background',
   'description',
+  'follower',
+  'following',
+  'posts',
 ]) {}
 
 export class FollowParamsDTO {
