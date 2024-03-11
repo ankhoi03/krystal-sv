@@ -164,7 +164,7 @@ export class PostService {
       throw new NotFoundException('Post not found or has been deleted');
     }
     if (post?.userId !== requestBy) {
-      throw new NotFoundException('You are not allowed to delete this post');
+      throw new NotFoundException('You are not authorized to delete this post');
     }
     await this.prisma.post.update({
       where: {

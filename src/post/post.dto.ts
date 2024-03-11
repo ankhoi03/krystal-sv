@@ -102,12 +102,44 @@ export class LikeResponseDto {
   like: number;
 }
 
+export class CommentDto {
+  @ApiProperty({
+    example: 'This is a comment',
+    description: 'The content of the comment',
+  })
+  @IsString()
+  @IsNotEmpty()
+  content: string;
+}
+
 export class CommentResponseDto {
   @ApiProperty({
     example: 1,
-    description: 'The num of comments of the post',
+    description: 'The id of the comment',
   })
   @IsNumber()
   @IsNotEmpty()
-  comment: number;
+  id: number;
+
+  @ApiProperty({
+    example: 'This is a comment',
+    description: 'The content of the comment',
+  })
+  @IsString()
+  @IsNotEmpty()
+  content: string;
+
+  @ApiProperty({
+    example: '2021-08-24T00:00:00.000Z',
+    description: 'The created date of the comment',
+  })
+  @IsNotEmpty()
+  @IsString()
+  createdAt: Date;
+
+  @ApiProperty({
+    type: UserSummaryDTO,
+    description: 'The user who created the comment',
+  })
+  user: UserSummaryDTO;
 }
